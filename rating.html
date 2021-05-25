@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+    <head>
+        <html lang="en" dir="ltr">
+        <meta charset="utf-8">
+        <title>Rating</title> 
+       
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+        <style>    
+
+.dropdown {
+  position: relative;
+  display: inline-block;
+  padding-right: 50px;
+ 
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #080808;
+  min-width: 190px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.8);
+  z-index: 1;
+}
+
+.dropdown-content a {
+  color: white;
+  padding-top: 20px;
+  padding-right: 50px;
+  padding-bottom: 10px;
+  text-decoration: none;
+  display: block;
+}
+
+.dropdown-content a:hover
+ {
+   background-color: #181818;
+ }
+
+.dropdown:hover .dropdown-content {
+  display: block;
+}
+
+.center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+ 
+}
+
+.buttonuser {
+  background-color: #181818; 
+  border: none;
+  color: white;
+ 
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+  border-radius: 55px;
+}
+
+svg:hover{
+  fill: #c3073f;
+}
+
+.carousel-inner img
+{
+  width : 100%;
+  height: 100%;
+  height: 225px;
+  border-radius: 10px;
+}
+.navbar-custom 
+{ 
+  background-color: #181818; 
+ }
+
+ .carousel .card
+ {
+   background-color: #080808;
+ }
+
+  input:focus, textarea:focus, select:focus{
+        outline: none;
+    }
+          
+        </style>
+    </head>
+
+    <body style="background-color: #080808;color: white; font-family: Helvetica Neue, Helvetica, Arial, sans-serif;">
+    <nav class="navbar navbar-expand-sm navbar-custom fixed-top ">
+ 
+
+<div class="ml-5"> 
+
+
+    <ul class="navbar-nav">
+      <li class="nav-item">
+      <div class="dropdown" >
+      <button class="button buttonuser">
+        <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="#c3073f" class="bi bi-list" viewBox="0 0 16 16">
+        <path fill-rule="evenodd" d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5z"/>
+        </svg>
+        <div class="dropdown-content">
+        <a href="{{ url_for('movielist_home') }}" method="GET">Movies for you List</a>
+        <a href="#">Series for you List</a>
+        <a href="{{ url_for('movie_search') }}" method="GET">Search</a>
+        </div>
+        </button>
+        </div>
+      </li>
+      <li class="nav-item">
+        
+        <p style="font-size: 25px;color: #c3073f; font-weight: bold;margin-left: -40px;">Getcinifed.com</p>
+	
+      </li>
+
+    </ul>
+</div>
+    <ul class="navbar-nav ml-auto"> 
+
+
+
+<div class="pr-3 mr-1 "> 
+    <li class="nav-item">
+      <div class="dropdown">
+      <button class="button buttonuser">
+      <svg xmlns="http://www.w3.org/2000/svg" width="40" height="30" fill="#c3073f" class="bi bi-person-circle" viewBox="0 0 16 16">
+      <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z"/>
+      <path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z"/>
+      </svg>
+      <div class="dropdown-content">
+      <a href="#">My account</a>
+      <a href="#">Wishlist</a>
+      <a href="#">Logout</a>
+      </div>
+      </button>
+      </div>
+     
+    </li>
+    
+</div>
+
+</div>
+</ul>
+</nav>
+        {% extends "template.html" %}
+        {% block content %}
+        <h4 style="color: #c3073f;padding-top: 120px;text-align: center;"><b>Rate these Genres to get Recommendations</b></h4>
+        
+        <form action="{{ url_for('recommendation') }}" method="POST" style="padding-left: 180px;padding-top: 40px;font-size: 22px;">
+            <div>
+            <p> <strong><font  color="white"> <font color="#c3073f" >Action </font></strong>
+
+                <input type="radio" name="Action" value="0" checked>0 
+                <input type="radio" name="Action" value="1" > 1
+                <input type="radio" name="Action" value="2"> 2
+                <input type="radio" name="Action" value="3"> 3
+                <input type="radio" name="Action" value="4"> 4
+                <input type="radio" name="Action" value="5"> 5
+            </p>
+           </div>
+            <p> <strong><font  color="white"> <font color="#c3073f">Adventure </font></strong>
+
+                <input type="radio" name="Adventure" value="0" checked> 0
+                <input type="radio" name="Adventure" value="1" > 1
+                <input type="radio" name="Adventure" value="2"> 2
+                <input type="radio" name="Adventure" value="3"> 3
+                <input type="radio" name="Adventure" value="4"> 4
+                <input type="radio" name="Adventure" value="5"> 5
+            </div>
+
+            <div>
+            <p> <strong><font  color="white"> <font color="#c3073f">Animation </font></strong>
+
+                <input type="radio" name="Animation" value="0" checked> 0
+                <input type="radio" name="Animation" value="1" > 1
+                <input type="radio" name="Animation" value="2"> 2
+                <input type="radio" name="Animation" value="3"> 3
+                <input type="radio" name="Animation" value="4"> 4
+                <input type="radio" name="Animation" value="5"> 5
+            </div>
+            
+            <div>
+            <p> <strong><font  color="white"> <font color="#c3073f">Children's </font></strong>
+
+                <input type="radio" name="Children" value="0" checked> 0
+                <input type="radio" name="Children" value="1" > 1
+                <input type="radio" name="Children" value="2"> 2
+                <input type="radio" name="Children" value="3"> 3
+                <input type="radio" name="Children" value="4"> 4
+                <input type="radio" name="Children" value="5"> 5
+            </div>
+
+            <div>
+             <p> <strong><font  color="white"> <font color="#c3073f">Comedy </font></strong>
+
+                <input type="radio" name="Comedy" value="0" checked> 0
+                <input type="radio" name="Comedy" value="1" > 1
+                <input type="radio" name="Comedy" value="2"> 2
+                <input type="radio" name="Comedy" value="3"> 3
+                <input type="radio" name="Comedy" value="4"> 4
+                <input type="radio" name="Comedy" value="5"> 5
+            </div>
+
+
+            <div>
+            <p> <strong><font  color="white"> <font color="#c3073f">Crime </font></strong>
+
+                <input type="radio" name="Crime" value="0" checked> 0
+                <input type="radio" name="Crime" value="1" > 1
+                <input type="radio" name="Crime" value="2"> 2
+                <input type="radio" name="Crime" value="3"> 3
+                <input type="radio" name="Crime" value="4"> 4
+                <input type="radio" name="Crime" value="5"> 5
+            </div>
+
+            <div>
+            <p> <strong><font  color="white"> <font color="#c3073f">Documentary </font></strong>
+
+                <input type="radio" name="Documentary" value="0" checked> 0
+                <input type="radio" name="Documentary" value="1" > 1
+                <input type="radio" name="Documentary" value="2"> 2
+                <input type="radio" name="Documentary" value="3"> 3
+                <input type="radio" name="Documentary" value="4"> 4
+                <input type="radio" name="Documentary" value="5"> 5
+            </div>
+
+            <div>
+            <p> <strong><font  color="white"> <font color="#c3073f">Drama </font></strong>
+
+                <input type="radio" name="Drama" value="0" checked> 0
+                <input type="radio" name="Drama" value="1" > 1
+                <input type="radio" name="Drama" value="2"> 2
+                <input type="radio" name="Drama" value="3"> 3
+                <input type="radio" name="Drama" value="4"> 4
+                <input type="radio" name="Drama" value="5"> 5
+            </div>
+
+            <div>
+            <p> <strong><font  color="white"> <font color="#c3073f">Fantasy </font></strong>
+
+                <input type="radio" name="Fantasy" value="0" checked> 0
+                <input type="radio" name="Fantasy" value="1" > 1
+                <input type="radio" name="Fantasy" value="2"> 2
+                <input type="radio" name="Fantasy" value="3"> 3
+                <input type="radio" name="Fantasy" value="4"> 4
+                <input type="radio" name="Fantasy" value="5"> 5
+            </div>
+
+            <div>
+            <p><strong><font  color="white">  <font color="#c3073f">Film-Noir </font></strong>
+
+                <input type="radio" name="FilmNoir" value="0" checked> 0
+                <input type="radio" name="FilmNoir" value="1" > 1
+                <input type="radio" name="FilmNoir" value="2"> 2
+                <input type="radio" name="FilmNoir" value="3"> 3
+                <input type="radio" name="FilmNoir" value="4"> 4
+                <input type="radio" name="FilmNoir" value="5"> 5
+            </div>
+
+            <div>
+             <p> <strong><font  color="white"> <font color="#c3073f">Horror </font></strong>
+
+                <input type="radio" name="Horror" value="0" checked> 0
+                <input type="radio" name="Horror" value="1" > 1
+                <input type="radio" name="Horror" value="2"> 2
+                <input type="radio" name="Horror" value="3"> 3
+                <input type="radio" name="Horror" value="4"> 4
+                <input type="radio" name="Horror" value="5"> 5
+            </div>
+
+            <div>
+            <p><strong><font  color="white">  <font color="#c3073f">Musical </font></strong>
+
+                <input type="radio" name="Musical" value="0" checked> 0
+                <input type="radio" name="Musical" value="1" > 1
+                <input type="radio" name="Musical" value="2"> 2
+                <input type="radio" name="Musical" value="3"> 3
+                <input type="radio" name="Musical" value="4"> 4
+                <input type="radio" name="Musical" value="5"> 5
+            </div>
+
+            <div>
+             <p><strong><font  color="white">  <font color="#c3073f">Mystery </font></strong>
+
+                <input type="radio" name="Mystery" value="0" checked> 0
+                <input type="radio" name="Mystery" value="1" > 1
+                <input type="radio" name="Mystery" value="2"> 2
+                <input type="radio" name="Mystery" value="3"> 3
+                <input type="radio" name="Mystery" value="4"> 4
+                <input type="radio" name="Mystery" value="5"> 5
+            </div>
+
+            <div>
+            <p> <strong><font  color="white"> <font color="#c3073f">Romance </font></strong>
+
+                <input type="radio" name="Romance" value="0" checked> 0
+                <input type="radio" name="Romance" value="1" > 1
+                <input type="radio" name="Romance" value="2"> 2
+                <input type="radio" name="Romance" value="3"> 3
+                <input type="radio" name="Romance" value="4"> 4
+                <input type="radio" name="Romance" value="5"> 5
+            </div>
+            </div>
+
+            <div>
+            <p> <strong><font  color="white"> <font color="#c3073f">Sci-Fi </font></strong>
+
+                <input type="radio" name="SciFi" value="0" checked> 0
+                <input type="radio" name="SciFi" value="1" > 1
+                <input type="radio" name="SciFi" value="2"> 2
+                <input type="radio" name="SciFi" value="3"> 3
+                <input type="radio" name="SciFi" value="4"> 4
+                <input type="radio" name="SciFi" value="5"> 5
+            </div>
+
+            <div>
+            <p> <strong><font  color="white"> <font color="#c3073f">War </font></strong>
+
+                <input type="radio" name="War" value="0" checked> 0
+                <input type="radio" name="War" value="1" > 1
+                <input type="radio" name="War" value="2"> 2
+                <input type="radio" name="War" value="3"> 3
+                <input type="radio" name="War" value="4"> 4
+                <input type="radio" name="War" value="5"> 5
+            </div>
+
+            <div>
+            <p> <strong><font  color="white"> <font color="#c3073f">Thriller </font></strong>
+
+                <input type="radio" name="Thriller" value="0" checked> 0
+                <input type="radio" name="Thriller" value="1" > 1
+                <input type="radio" name="Thriller" value="2"> 2
+                <input type="radio" name="Thriller" value="3"> 3
+                <input type="radio" name="Thriller" value="4"> 4
+                <input type="radio" name="Thriller" value="5"> 5
+            </div>
+
+            <div>
+            <p> <strong><font  color="white"> <font color="#c3073f">Western </font></strong>
+
+                <input type="radio" name="Western" value="0" checked> 0
+                <input type="radio" name="Western" value="1" > 1
+                <input type="radio" name="Western" value="2"> 2
+                <input type="radio" name="Western" value="3"> 3
+                <input type="radio" name="Western" value="4"> 4
+                <input type="radio" name="Western" value="5"> 5
+            </div>
+<br><br><br>
+            <div class="center">
+            <button type="submit" class="btn " style="background-color: #c3073f;font-size: 20px;"><font color="white"><bold>Get Recommendations!</bold></button>
+            <br>
+            <br><br><br></div>
+
+        </form>
+        {% endblock %}
+    </body>
+</html>

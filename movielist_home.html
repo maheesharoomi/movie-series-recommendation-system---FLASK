@@ -1,0 +1,700 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>home</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+
+
+<style>
+
+input
+{
+  border: 3px solid #c3073f;
+  height: 40px;
+  width: 300px;
+  border-radius: 50px;
+  padding: 0px 10px;
+  background-color: #080808;
+  color: white;
+
+}
+
+.dropdown {
+  position: relative;
+  display: inline-block;
+  padding-right: 50px;
+ 
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #080808;
+  min-width: 190px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.8);
+  z-index: 1;
+}
+
+.dropdown-content a {
+  color: white;
+  padding-top: 20px;
+  padding-right: 50px;
+  padding-bottom: 10px;
+  text-decoration: none;
+  display: block;
+}
+
+.dropdown-content a:hover
+ {
+   background-color: #181818;
+ }
+
+.dropdown:hover .dropdown-content {
+  display: block;
+}
+
+
+
+.buttonuser {
+  background-color: #181818; 
+  border: none;
+  color: white;
+ 
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+  border-radius: 55px;
+}
+
+svg:hover{
+  fill: #c3073f;
+}
+
+.carousel-inner img
+{
+  width : 100%;
+  height: 100%;
+  height: 225px;
+  border-radius: 10px;
+}
+.navbar-custom 
+{ 
+  background-color: #181818; 
+ }
+
+ .carousel .card
+ {
+   background-color: #080808;
+ }
+
+  input:focus, textarea:focus, select:focus{
+        outline: none;
+    }
+
+
+</style>
+
+</head>
+
+<body style="background-color: #080808;color: white; font-family: Helvetica Neue, Helvetica, Arial, sans-serif;">
+
+<nav class="navbar navbar-expand-sm navbar-custom fixed-top ">
+ 
+
+<div class="ml-5"> 
+
+
+    <ul class="navbar-nav">
+      <li class="nav-item">
+      <div class="dropdown" >
+      <button class="button buttonuser">
+        <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="#c3073f" class="bi bi-list" viewBox="0 0 16 16">
+        <path fill-rule="evenodd" d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5z"/>
+        </svg>
+        <div class="dropdown-content">
+        <a href="{{ url_for('movielist_home') }}" method="GET">Movies for you List</a>
+        <a href="{{ url_for('movie_search') }}" method="GET">Search</a>
+        <a href="{{ url_for('rating') }}" method="GET">Rate Genres</a>
+        </div>
+        </button>
+        </div>
+      </li>
+      <li class="nav-item">
+        
+        <p style="font-size: 25px;color: #c3073f; font-weight: bold;margin-left: -40px;">Getcinifed.com</p>
+	
+      </li>
+
+    </ul>
+</div>
+    <ul class="navbar-nav ml-auto"> 
+
+
+
+<div class="pr-3 mr-1 "> 
+    <li class="nav-item">
+      <div class="dropdown">
+      <button class="button buttonuser">
+      <svg xmlns="http://www.w3.org/2000/svg" width="40" height="30" fill="#c3073f" class="bi bi-person-circle" viewBox="0 0 16 16">
+      <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z"/>
+      <path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z"/>
+      </svg>
+      <div class="dropdown-content">
+      <a href="#">My account</a>
+      <a href="{{ url_for('logout') }}" method="GET">Logout</a>
+      </div>
+      </button>
+      </div>
+     
+    </li>
+    
+</div>
+
+</div>
+</ul>
+</nav>
+
+<h4 style="color: #c3073f;padding-top: 120px;text-align: center;"><b>MOVIES FOR YOU!</b></h4>
+
+<div id="carousel1" style="padding-top: 20px;padding-left: 80px;padding-right: 80px;">
+
+  <h4 style="padding-top: 10px;"><b>Popular on Hollywood</b></h4>
+  <br>
+    <!--Carousel Wrapper-->
+    <div id="multi-item-example" class="carousel slide carousel-multi-item" data-ride="carousel" data-interval="false">
+
+    <!--Slides-->
+      <div class="carousel-inner row w-100 mx-auto" role="listbox">
+        <br>
+        <!--First slide-->
+        <div class="carousel-item active">
+        
+
+          <div class="row">
+
+          <div class="col-md-2">
+              <div class="card mb-2">
+                <a href="{{ url_for('sciholly') }}" method="GET">
+                 <img src="{{url_for('static', filename='sci.jpeg')}}" class="img-fluid mx-auto d-block"  alt="boxof.jpg">
+                </a>  
+                
+              </div>
+            </div>
+
+             <div class="col-md-2">
+              <div class="card mb-2">
+                
+                 <img src="{{url_for('static', filename='2000.jpeg')}}" class="img-fluid mx-auto d-block"  alt="boxof.jpg">
+                     
+                
+              </div>
+            </div>
+
+             
+
+            <div class="col-md-2">
+              <div class="card mb-2">
+                
+                 <img src="{{url_for('static', filename='brad.jpeg')}}"class="img-fluid mx-auto d-block"  alt="boxof.jpg">
+                       
+                
+              </div>
+            </div>
+
+            <div class="col-md-2">
+              <div class="card mb-2">
+                
+                 <img src="{{url_for('static', filename='disney.jpeg')}}" class="img-fluid mx-auto d-block"  alt="boxof.jpg">
+                      
+                
+              </div>
+            </div>
+            <div class="col-md-2">
+              <div class="card mb-2">
+                
+                 <img src="{{url_for('static', filename='marvel.jpeg')}}" class="img-fluid mx-auto d-block"  alt="boxof.jpg">
+                       
+                
+              </div>
+            </div>
+
+             <div class="col-md-2">
+              <div class="card mb-2">
+                
+                 <img src="{{url_for('static', filename='kong.jpeg')}}"class="img-fluid mx-auto d-block"  alt="boxof.jpg">
+                     
+                
+              </div>
+            </div>
+
+            
+
+           
+           <div style="padding-left: 1340px;">
+           <a class="btn-floating" href="#multi-item-example" data-slide="next">
+           <svg width="2em" height="4em" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="white" class="bi bi-caret-right-fill" viewBox="0 0 16 16">
+           <path d="m12.14 8.753-5.482 4.796c-.646.566-1.658.106-1.658-.753V3.204a1 1 0 0 1 1.659-.753l5.48 4.796a1 1 0 0 1 0 1.506z"/>
+           </svg>
+           </a>
+           </div>
+                       
+
+          </div><!--Closing of row-->
+          
+
+        </div> <!--/.First slide-->
+
+        <!--Second slide-->
+        <div class="carousel-item">
+
+          <div class="row">
+
+           <div class="col-md-2">
+              <div class="card mb-2">
+                
+                 <img src="{{url_for('static', filename='tom.jpeg')}}" class="img-fluid mx-auto d-block"  alt="boxof.jpg">
+                     
+                
+              </div>
+            </div>
+
+             <div class="col-md-2">
+              <div class="card mb-2">
+                
+                 <img src="{{url_for('static', filename='titanic.jpeg')}}" class="img-fluid mx-auto d-block"  alt="boxof.jpg">
+                     
+                
+              </div>
+            </div>
+
+              <div class="col-md-2">
+            
+              <div class="card mb-2">
+                               
+                 <img src="{{url_for('static', filename='boxof.jpg')}}" class="img-fluid mx-auto d-block"  alt="boxof.jpg">
+                      
+                
+              </div>
+            </div>
+
+            <div class="col-md-2">
+              <div class="card mb-2">
+                
+                 <img src="{{url_for('static', filename='decap.jpeg')}}" class="img-fluid mx-auto d-block"  alt="boxof.jpg">
+                       
+                
+              </div>
+            </div>
+             
+            <div class="col-md-2">
+              <div class="card mb-2">
+                
+                 <img src="{{url_for('static', filename='sports.jpeg')}}" class="img-fluid mx-auto d-block"  alt="boxof.jpg">
+                     
+                
+              </div>
+            </div>      
+
+                      
+
+            <div class="col-md-2">
+              <div class="card mb-2">
+                
+                 <img src="{{url_for('static', filename='drama.jpeg')}}" class="img-fluid mx-auto d-block"  alt="boxof.jpg">
+                     
+                
+              </div>
+            </div>
+
+            <div style="padding-left: 15px;">
+               <a class="btn-floating" href="#multi-item-example" data-slide="prev">
+               <svg width="2em" height="4em" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="white" class="bi bi-caret-left-fill" viewBox="0 0 16 16">
+               <path d="m3.86 8.753 5.482 4.796c.646.566 1.658.106 1.658-.753V3.204a1 1 0 0 0-1.659-.753l-5.48 4.796a1 1 0 0 0 0 1.506z"/>
+              </svg>
+               </a>
+            </div>
+            
+
+          </div>
+
+        </div>
+        <!--/.Second slide-->
+
+        
+      </div>
+      <!--/.Slides-->
+      
+    
+    </div><!--/.FIRST Carousel Wrapper-->
+
+</div><!--/.FIRST Carousel DIV Wrapper-->
+
+
+<div id="carousel2" style="padding-top: 20px;padding-left: 80px;padding-right: 80px;">
+
+  <h4 style="padding-top: 20px;"><b>Trending in India<b></h4>
+  <br>
+    <!--SECOND Carousel Wrapper-->
+    <div id="multi-item-example2" class="carousel slide carousel-multi-item" data-ride="carousel" data-interval="false">
+
+    <!--Slides-->
+      <div class="carousel-inner row w-100 mx-auto" role="listbox">
+        <br>
+        <!--First slide-->
+        <div class="carousel-item active">
+        
+
+          <div class="row">
+
+             <div class="col-md-2">
+            
+              <div class="card mb-2">
+                               
+                 <img src="{{url_for('static', filename='90s.jpeg')}}" class="img-fluid mx-auto d-block"  alt="boxof.jpg">
+                      
+                
+              </div>
+            </div>
+
+            <div class="col-md-2">
+              <div class="card mb-2">
+                
+                 <img src="{{url_for('static', filename='light.jpg')}}" class="img-fluid mx-auto d-block"  alt="boxof.jpg">
+                       
+                
+              </div>
+            </div>
+
+            <div class="col-md-2">
+              <div class="card mb-2">
+                
+                 <img src="{{url_for('static', filename='south.jpg')}}" class="img-fluid mx-auto d-block"  alt="boxof.jpg">
+                       
+                
+              </div>
+            </div>
+
+            <div class="col-md-2">
+              <div class="card mb-2">
+                
+                 <img src="{{url_for('static', filename='popindia.jpeg')}}" class="img-fluid mx-auto d-block"  alt="boxof.jpg">
+                      
+                
+              </div>
+            </div>
+            <div class="col-md-2">
+              <div class="card mb-2">
+                
+                 <img  src="{{url_for('static', filename='mastani.jpg')}}" class="img-fluid mx-auto d-block"  alt="boxof.jpg">
+                       
+                
+              </div>
+            </div>
+
+            <div class="col-md-2">
+              <div class="card mb-2">
+                
+                 <img  src="{{url_for('static', filename='indrom.jpg')}}" class="img-fluid mx-auto d-block"  alt="boxof.jpg">
+                     
+                
+              </div>
+            </div>
+
+           
+           <div style="padding-left: 1340px;">
+           <a class="btn-floating" href="#multi-item-example2" data-slide="next">
+           <svg width="2em" height="4em" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="white" class="bi bi-caret-right-fill" viewBox="0 0 16 16">
+           <path d="m12.14 8.753-5.482 4.796c-.646.566-1.658.106-1.658-.753V3.204a1 1 0 0 1 1.659-.753l5.48 4.796a1 1 0 0 1 0 1.506z"/>
+           </svg>
+           </a>
+           </div>
+                       
+
+          </div><!--Closing of row-->
+          
+
+        </div> <!--/.First slide-->
+
+        <!--Second slide-->
+        <div class="carousel-item">
+
+          <div class="row">
+
+           <div class="col-md-2">
+              <div class="card mb-2">
+                
+                 <img  src="{{url_for('static', filename='2020.jpeg')}}" class="img-fluid mx-auto d-block"  alt="boxof.jpg">
+                     
+                
+              </div>
+            </div>
+
+             <div class="col-md-2">
+              <div class="card mb-2">
+                
+                 <img  src="{{url_for('static', filename='sportind.jpg')}}" class="img-fluid mx-auto d-block"  alt="boxof.jpg">
+                     
+                
+              </div>
+            </div>
+
+             <div class="col-md-2">
+              <div class="card mb-2">
+                
+                 <img  src="{{url_for('static', filename='indhor.jpg')}}" class="img-fluid mx-auto d-block"  alt="boxof.jpg">
+                     
+                
+              </div>
+            </div>
+
+             <div class="col-md-2">
+              <div class="card mb-2">
+                
+                 <img  src="{{url_for('static', filename='ind2000.jpg')}}" class="img-fluid mx-auto d-block"  alt="boxof.jpg">
+                     
+                
+              </div>
+            </div>
+
+            <div class="col-md-2">
+              <div class="card mb-2">
+                
+                 <img  src="{{url_for('static', filename='indaction.jpg')}}" class="img-fluid mx-auto d-block"  alt="boxof.jpg">
+                     
+                
+              </div>
+            </div>
+
+            
+
+            
+
+            <div class="col-md-2">
+              <div class="card mb-2">
+                
+                 <img  src="{{url_for('static', filename='inddance.jpg')}}" class="img-fluid mx-auto d-block"  alt="boxof.jpg">
+                     
+                
+              </div>
+            </div>
+
+            <div style="padding-left: 15px;">
+               <a class="btn-floating" href="#multi-item-example2" data-slide="prev">
+               <svg width="2em" height="4em" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="white" class="bi bi-caret-left-fill" viewBox="0 0 16 16">
+               <path d="m3.86 8.753 5.482 4.796c.646.566 1.658.106 1.658-.753V3.204a1 1 0 0 0-1.659-.753l-5.48 4.796a1 1 0 0 0 0 1.506z"/>
+              </svg>
+               </a>
+            </div>
+            
+
+          </div>
+
+        </div>
+        <!--/.Second slide-->
+
+        
+      </div>
+      <!--/.Slides-->
+      
+   
+    </div> <!--/.SECOND Carousel Wrapper-->
+</div> <!--/.SECOND Carousel DIV Wrapper-->
+
+
+<div id="carousel3" style="padding-top: 20px;padding-left: 80px;padding-right: 80px;">
+
+  <h4 style="padding-top: 20px;"><b>Kollywood Classics<b></h4>
+  <br>
+    <!--THIRD Carousel Wrapper-->
+    <div id="multi-item-example3" class="carousel slide carousel-multi-item" data-ride="carousel" data-interval="false">
+
+    <!--Slides-->
+      <div class="carousel-inner row w-100 mx-auto" role="listbox">
+        <br>
+        <!--First slide-->
+        <div class="carousel-item active">
+        
+
+          <div class="row">
+
+             <div class="col-md-2">
+            
+              <div class="card mb-2">
+                 <a href="{{ url_for('dhanush') }}" method="GET">           
+                 <img  src="{{url_for('static', filename='stard.jpg')}}" class="img-fluid mx-auto d-block"  alt="boxof.jpg">
+                </a>  
+                
+              </div>
+            </div>
+
+            <div class="col-md-2">
+              <div class="card mb-2">
+                 <a href="{{ url_for('kqueen') }}" method="GET"> 
+                 <img  src="{{url_for('static', filename='nayan.jpg')}}" class="img-fluid mx-auto d-block"  alt="boxof.jpg">
+                </a>   
+                
+              </div>
+            </div>
+
+            <div class="col-md-2">
+              <div class="card mb-2">
+                
+                <a href="{{ url_for('mani') }}" method="GET"> 
+                 <img  src="{{url_for('static', filename='mani.jpg')}}" class="img-fluid mx-auto d-block"  alt="boxof.jpg">
+                </a>    
+                
+              </div>
+            </div>
+
+            <div class="col-md-2">
+              <div class="card mb-2">
+                
+                <a href="{{ url_for('gvm') }}" method="GET"> 
+                 <img  src="{{url_for('static', filename='gvm.jpg')}}" class="img-fluid mx-auto d-block"  alt="boxof.jpg">
+                </a>     
+                
+              </div>
+            </div>
+            <div class="col-md-2">
+              <div class="card mb-2">
+                
+                <a href="{{ url_for('breeze') }}" method="GET"> 
+                 <img  src="{{url_for('static', filename='jaanu.jpg')}}" class="img-fluid mx-auto d-block"  alt="boxof.jpg">
+                       </a>
+                
+              </div>
+            </div>
+
+            <div class="col-md-2">
+              <div class="card mb-2">
+                
+                <a href="{{ url_for('funny') }}" method="GET"> 
+                 <img  src="{{url_for('static', filename='funt.jpg')}}" class="img-fluid mx-auto d-block"  alt="boxof.jpg">
+                     </a>
+                
+              </div>
+            </div>
+
+           
+           <div style="padding-left: 1340px;">
+           <a class="btn-floating" href="#multi-item-example3" data-slide="next">
+           <svg width="2em" height="4em" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="white" class="bi bi-caret-right-fill" viewBox="0 0 16 16">
+           <path d="m12.14 8.753-5.482 4.796c-.646.566-1.658.106-1.658-.753V3.204a1 1 0 0 1 1.659-.753l5.48 4.796a1 1 0 0 1 0 1.506z"/>
+           </svg>
+           </a>
+           </div>
+                       
+
+          </div><!--Closing of row-->
+          
+
+        </div> <!--/.First slide-->
+
+        <!--Second slide-->
+        <div class="carousel-item">
+
+          <div class="row">
+
+           <div class="col-md-2">
+              <div class="card mb-2">
+                
+                <a href="{{ url_for('ajith') }}" method="GET"> 
+                 <img  src="{{url_for('static', filename='thala.jpg')}}" class="img-fluid mx-auto d-block"  alt="boxof.jpg">
+                    </a> 
+                
+              </div>
+            </div>
+
+             <div class="col-md-2">
+              <div class="card mb-2">
+                
+                <a href="{{ url_for('samantha') }}" method="GET"> 
+                 <img  src="{{url_for('static', filename='sama.jpg')}}" class="img-fluid mx-auto d-block"  alt="boxof.jpg">
+                    </a> 
+                
+              </div>
+            </div>
+
+             <div class="col-md-2">
+              <div class="card mb-2">
+
+              <a href="{{ url_for('vijay') }}" method="GET">                 
+                 <img  src="{{url_for('static', filename='starvijay.jpg')}}" class="img-fluid mx-auto d-block"  alt="boxof.jpg">
+                     </a>
+                
+              </div>
+            </div>
+
+             <div class="col-md-2">
+              <div class="card mb-2">
+
+                <a href="{{ url_for('vjs') }}" method="GET"> 
+                 <img  src="{{url_for('static', filename='vjs.jpg')}}" class="img-fluid mx-auto d-block"  alt="boxof.jpg">
+                     </a>
+                
+              </div>
+            </div>
+
+            <div class="col-md-2">
+              <div class="card mb-2">
+              
+                <a href="{{ url_for('ninsh') }}" method="GET"> 
+                 <img  src="{{url_for('static', filename='90tam.jpg')}}" class="img-fluid mx-auto d-block"  alt="boxof.jpg">
+                    </a> 
+                
+              </div>
+            </div>
+
+            
+
+            
+
+            <div class="col-md-2">
+              <div class="card mb-2">
+
+                 <a href="{{ url_for('ninvj') }}" method="GET">                 
+                 <img  src="{{url_for('static', filename='90vij.jpg')}}" class="img-fluid mx-auto d-block"  alt="boxof.jpg">
+                     </a>
+                
+              </div>
+            </div>
+
+            <div style="padding-left: 15px;">
+               <a class="btn-floating" href="#multi-item-example3" data-slide="prev">
+               <svg width="2em" height="4em" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="white" class="bi bi-caret-left-fill" viewBox="0 0 16 16">
+               <path d="m3.86 8.753 5.482 4.796c.646.566 1.658.106 1.658-.753V3.204a1 1 0 0 0-1.659-.753l-5.48 4.796a1 1 0 0 0 0 1.506z"/>
+              </svg>
+               </a>
+            </div>
+            
+
+          </div>
+
+        </div>
+        <!--/.Second slide-->
+
+        
+      </div>
+      <!--/.Slides-->
+      <br><br><br><br><br><br>
+   
+     
+    </div> <!--/.THIRD Carousel Wrapper-->
+</div> <!--/.THIRD Carousel DIV Wrapper-->
+
+
+
+
+</div> <!--Total closing-->
+
+
+</body>
+</html>
